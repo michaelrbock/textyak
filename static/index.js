@@ -1,1 +1,0 @@
-var templateFunction = Handlebars.compile($('#text-template').html());

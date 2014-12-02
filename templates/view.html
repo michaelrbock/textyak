@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block body %}
+  <div class="container">
+    <div class="header">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation"><a href="/">Home</a></li>
+          <li role="presentation" class="active"><a href="/view">View</a></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">TextYak</h3>
+    </div>
+
+    <div class="row marketing" id="filter-results">
+      <!-- weird-ness b/c combining jinja and handlebars templates -->
+      <script type="text/handlebars" id="filter-template">
+        <div class="col-md-3">
+          <form action="" class="filter" id="{{'{{type}}'}}">
+            <select style="min-width: 93px; max-width: 100px">
+              <option selected="selected" disabled="disabled" value="0">{{'{{type}}'}}</option>
+              {{'{{#each values}}'}}
+                <option>{{'{{this}}'}}</option>
+              {{'{{/each}}'}}
+            </select>
+            <input type="submit" value="Filter" class="btn btn-link"></input>
+          </form>
+        </div>
+      </script>
+    </div> <!-- \. row marketing -->
+
+    <div class="row marketing" id="title-results"></div>
+    <script type="text/handlebars" id="title-template">
+      {{'{{#if type}}'}}
+        <h2 style="text-align: center;">Texts from {{'{{value}}'}}</h2>
+      {{'{{else}}'}}
+        <h2 style="text-align: center;">Texts from All Over</h2>
+      {{'{{/if}}'}}
+    </script>
+
+    <div id="text-results"></div>
+    <script type="text/handlebars" id="text-template">
+      <div class="row marketing">
+        <h4>({{'{{area_code}}'}}) {{'{{body}}'}}</h4>
+        <div class="col-md-3">{{'{{city}}'}}, {{'{{state}}'}}</div>
+        <div class="col-md-2">{{'{{zip_code}}'}}</div>
+        <div class="col-md-3">{{'{{time_since}}'}} ago</div>
+      </div>
+      <hr>
+    </script>
+
+  </div> <!-- /. container -->
+
+  <script src="/static/view.js"></script>
+{% endblock %}

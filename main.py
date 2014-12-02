@@ -31,6 +31,11 @@ class MainHandler(BaseHandler):
         self.render('index.html')
 
 
+class ViewHandler(BaseHandler):
+    def get(self):
+        self.render('view.html')
+
+
 class SmsHandler(BaseHandler):
     def post(self):
         city = self.request.get('FromCity').title()
@@ -87,6 +92,26 @@ class TextsHandler(BaseHandler):
         self.write(json.dumps(response))
 
 
+class CategoriesHandler(BaseHandler):
+    def get(self):
+        qry = SMS.query().order(-SMS.date)
+
+        response = {'cities': set(), 'states': set(), 'zip_codes': set(), 'countries': set(),
+            'area_codes': set()}
+
+        for text in qry:
+            response['cities'].add(text.city)
+            response['states'].add(text.state)
+            response['zip_codes'].add(text.zip_code)
+            response['countries'].add(text.country)
+            response['area_codes'].add(text.area_code)
+
+        for key in response:
+            response[key] = list(response[key])
+
+        self.write(json.dumps(response))
+
+
 class SMS(ndb.Model):
     city = ndb.StringProperty()
     state = ndb.StringProperty()
@@ -99,6 +124,8 @@ class SMS(ndb.Model):
 
 app = webapp2.WSGIApplication([
     ('/?', MainHandler),
+    ('/view/?', ViewHandler),
     ('/api/sms/?', SmsHandler),
-    ('/api/texts/?', TextsHandler)
+    ('/api/texts/?', TextsHandler),
+    ('/api/categories/?', CategoriesHandler)
 ], debug=True)
