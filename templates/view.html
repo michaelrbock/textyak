@@ -28,7 +28,13 @@
       </script>
     </div> <!-- \. row marketing -->
 
-    <div class="row marketing" id="title-results"></div>
+    <div class="row marketing">
+      <div id="title-results"></div>
+      <div id="twitter-button" style="text-align: center;">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out these TextYaks!" data-via="michaelrbock" data-related="michaelrbock" data-count="none" data-hashtags="TextYak">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </div>
+    </div>
     <script type="text/handlebars" id="title-template">
       {{'{{#if type}}'}}
         <h2 style="text-align: center;">Texts from {{'{{value}}'}}</h2>

@@ -51,8 +51,8 @@ class SmsHandler(BaseHandler):
         self.response.headers['Content-Type'] = 'text/xml'
         response = """<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Message>Thanks for the text from %s! Check it out at http://textyak.appspot.com</Message>
-</Response>""" % city
+    <Message>Thanks for the text from area code (%s)! Check it out at http://textyak.appspot.com</Message>
+</Response>""" % area_code
         self.write(response)
 
 
