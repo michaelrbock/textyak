@@ -68,30 +68,48 @@ var categoriesApi = {
 };
 
 // initial page setup
-textApi.call(null, null);
+$(document).ready(function() {
+    categoriesPromise = categoriesApi.call();
 
-categoriesPromise = categoriesApi.call();
+    var filter = window.location.hash.substr(1).split('=');
 
-// Form binding must be done after options are populated
-categoriesPromise.done(function() {
-    $('.filter').on('submit', function(e) {
-        e.preventDefault();
-        e.returnValue = false;
+    if (filter[0] == 'area_code') {
+        textApi.call('area_code', filter[1]);
+    } else if (filter[0] == 'city') {
+        textApi.call('city', filter[1]);
+    } else if (filter[0] == 'state') {
+        textApi.call('state', filter[1]);
+    } else if (filter[0] == 'zip_code') {
+        textApi.call('zip_code', filter[1]);
+    } else {
+        textApi.call(null, null);
+    }
 
-        currentId = this.id;
+    // Form binding must be done after options are populated
+    categoriesPromise.done(function() {
+        $('.filter').on('submit', function(e) {
+            e.preventDefault();
+            e.returnValue = false;
 
-        // clear all other filters
-        $('.filter').each(function(index) {
-            if (this.id != currentId) {
-                $('#' + this.id + ' select').val('0');
+            currentId = this.id;
+
+            // clear all other filters
+            $('.filter').each(function(index) {
+                if (this.id != currentId) {
+                    $('#' + this.id + ' select').val('0');
+                }
+            });
+
+            filterBy = this.id.replace('-', '_').toLowerCase();
+            value = $('#' + this.id + ' select').val();
+
+            if (filterBy && value) {
+                textApi.call(filterBy, value);
+
+                // change url hash
+                window.location.hash = filterBy + '=' + value;
             }
         });
-
-        filterBy = this.id.replace('-', '_').toLowerCase();
-        value = $('#' + this.id + ' select').val();
-
-        if (filterBy && value) {
-            textApi.call(filterBy, value);
-        }
     });
+
 });

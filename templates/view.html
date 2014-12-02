@@ -8,7 +8,7 @@
           <li role="presentation" class="active"><a href="/view">View</a></li>
         </ul>
       </nav>
-      <h3 class="text-muted">TextYak</h3>
+      <h3 class="text-muted"><a href="/" style="text-decoration: none; color: #777;">TextYak</a></h3>
     </div>
 
     <div class="row marketing" id="filter-results">
@@ -16,7 +16,7 @@
       <script type="text/handlebars" id="filter-template">
         <div class="col-md-3">
           <form action="" class="filter" id="{{'{{type}}'}}">
-            <select style="min-width: 93px; max-width: 100px">
+            <select style="min-width: 95px; max-width: 95px">
               <option selected="selected" disabled="disabled" value="0">{{'{{type}}'}}</option>
               {{'{{#each values}}'}}
                 <option>{{'{{this}}'}}</option>
