@@ -1,0 +1,9 @@
+body {
+    background-color: black;
+    color: white;
+    padding-top: 50px;
+}
+.hero {
+  padding: 40px 15px;
+  text-align: center;
+}

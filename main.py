@@ -28,7 +28,7 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        self.write('Hello world!')
+        self.render('index.html')
 
 
 class SmsHandler(BaseHandler):
@@ -62,21 +62,21 @@ class TextsHandler(BaseHandler):
         area_code = self.request.get('area_code')
 
         if area_code:
-            qry = SMS.query(SMS.area_code == area_code).order(-SMS.last_modified)
+            qry = SMS.query(SMS.area_code == area_code).order(-SMS.date)
         elif city:
-            qry = SMS.query(SMS.city == city).order(-SMS.last_modified)
+            qry = SMS.query(SMS.city == city).order(-SMS.date)
         elif state:
-            qry = SMS.query(SMS.state == state).order(-SMS.last_modified)
+            qry = SMS.query(SMS.state == state).order(-SMS.date)
         elif zip_code:
-            qry = SMS.query(SMS.zip_code == zip_code).order(-SMS.last_modified)
+            qry = SMS.query(SMS.zip_code == zip_code).order(-SMS.date)
         elif country:
-            qry = SMS.query(SMS.country == country).order(-SMS.last_modified)
+            qry = SMS.query(SMS.country == country).order(-SMS.date)
         else:
-            qry = SMS.query().order(-SMS.last_modified)
+            qry = SMS.query().order(-SMS.date)
 
         response = {'data': []}
         for text in qry:
-            time_since_seconds = (datetime.datetime.utcnow() - text.last_modified).seconds
+            time_since_seconds = (datetime.datetime.utcnow() - text.date).seconds
             hours, remainder = divmod(time_since_seconds, 3600)
             minutes, seconds = divmod(remainder, 60)
             time_since = '%sh:%sm:%ss' % (hours, minutes, seconds)
@@ -94,7 +94,7 @@ class SMS(ndb.Model):
     country = ndb.StringProperty()
     area_code = ndb.StringProperty()
     body = ndb.StringProperty()
-    last_modified = ndb.DateTimeProperty(auto_now=True)
+    date = ndb.DateTimeProperty(auto_now_add=True)
 
 
 app = webapp2.WSGIApplication([
