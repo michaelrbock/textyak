@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import datetime
 import webapp2
 import logging
 import jinja2
@@ -51,8 +52,39 @@ class SmsHandler(BaseHandler):
 
 
 class TextsHandler(BaseHandler):
-    """Possible query param options for each of the SMS properties"""
-    pass
+    def get(self):
+        """Possible query param options for each of the SMS properties"""
+
+        city = self.request.get('city')
+        state = self.request.get('state')
+        zip_code = self.request.get('zip_code')
+        country = self.request.get('country')
+        area_code = self.request.get('area_code')
+
+        if area_code:
+            qry = SMS.query(SMS.area_code == area_code).order(-SMS.last_modified)
+        elif city:
+            qry = SMS.query(SMS.city == city).order(-SMS.last_modified)
+        elif state:
+            qry = SMS.query(SMS.state == state).order(-SMS.last_modified)
+        elif zip_code:
+            qry = SMS.query(SMS.zip_code == zip_code).order(-SMS.last_modified)
+        elif country:
+            qry = SMS.query(SMS.country == country).order(-SMS.last_modified)
+        else:
+            qry = SMS.query().order(-SMS.last_modified)
+
+        response = {'data': []}
+        for text in qry:
+            time_since_seconds = (datetime.datetime.utcnow() - text.last_modified).seconds
+            hours, remainder = divmod(time_since_seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            time_since = '%sh:%sm:%ss' % (hours, minutes, seconds)
+            response['data'].append({'city': text.city, 'state': text.state, 'zip_code':
+                text.zip_code, 'country': text.country, 'area_code': text.area_code, 'body':
+                text.body, 'time_since': time_since})
+
+        self.write(json.dumps(response))
 
 
 class SMS(ndb.Model):
