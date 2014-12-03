@@ -1,5 +1,5 @@
-var textList = {
-    templateFunction: Handlebars.compile($('#text-template').html()),
+var homePageTexts = {
+    templateFunction: Handlebars.compile($('#home-text-template').html()),
 
     render: function(response) {
         var html = '';
@@ -18,6 +18,6 @@ var textList = {
 
 $(document).ready(function() {
     $.getJSON('/api/texts', function(response) {
-        textList.render(response);
+        homePageTexts.render(response);
     });
 });

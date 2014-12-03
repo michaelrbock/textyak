@@ -10,18 +10,50 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="/static/src/handlebars-v2.0.0.js"></script>
 
-  <script type="text/handlebars" id="text-template">
+  <script type="text/handlebars" id="home-text-template">
     <h4>({{area_code}})</h4>
     <p>{{body}}</p>
   </script>
 
+  <script type="text/handlebars" id="filter-template">
+    <div class="col-md-3">
+      <form action="" class="filter" id="{{type}}">
+        <select style="min-width: 95px; max-width: 95px">
+          <option selected="selected" disabled="disabled" value="0">{{type}}</option>
+          {{#each values}}
+            <option>{{this}}</option>
+          {{/each}}
+        </select>
+        <input type="submit" value="Filter" class="btn btn-link"></input>
+      </form>
+    </div>
+  </script>
+
+  <script type="text/handlebars" id="title-template">
+    {{#if type}}
+      <h2 style="text-align: center;">Texts from {{value}}</h2>
+    {{else}}
+      <h2 style="text-align: center;">Texts from All Over</h2>
+    {{/if}}
+  </script>
+
+  <script type="text/handlebars" id="text-template">
+    <div class="row marketing">
+      <h4>({{area_code}}) {{body}}</h4>
+      <div class="col-md-3">{{city}}, {{state}}</div>
+      <div class="col-md-2">{{zip_code}}</div>
+      <div class="col-md-3">{{time_since}} ago</div>
+    </div>
+    <hr>
+  </script>
+
   <!-- include source file here... -->
   <script src="/static/src/index.js"></script>
-  <!--<script src="/static/src/view.js"></script>-->
+  <script src="/static/src/view.js"></script>
 
   <!-- include spec files here... -->
   <script src="/static/spec/index.spec.js"></script>
-  <!--<script src="/static/spec/view.spec.js"></script>-->
+  <script src="/static/spec/view.spec.js"></script>
 
   <script>
     (function() {
@@ -58,6 +90,9 @@
 <div id="container" style="display: none;"></div>
 <div id="text-results-1" style="display: none;"></div>
 <div id="text-results-2" style="display: none;"></div>
+<div id="filter-results" style="display: none;"></div>
+<div id="title-results" style="display: none;"></div>
+<div id="text-results" style="display: none;"></div>
 
 <script type="template" id="fixture-template">
   <div><a href="#">Box 1</a></div>

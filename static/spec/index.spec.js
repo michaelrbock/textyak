@@ -1,110 +1,17 @@
 describe('Index Page JS', function() {
-    beforeEach(function() {
-        // var fixtureHTML = document.getElementById('text-template').innerHTML;
-        // document.getElementById('container').innerHTML = fixtureHTML;
-    });
-
-    describe('textList', function() {
+    describe('homePageTexts', function() {
         describe('templateFunction', function() {
             it('should compile a handlebars fucntion', function() {
-                expect(textList.templateFunction()).toEqual(' <h4>()</h4> <p></p> ');
+                expect(homePageTexts.templateFunction()).toEqual('\n    <h4>()</h4>\n    <p></p>\n  ');
             });
         });
 
         describe('render', function() {
             it('should inject 6 texts into the page', function() {
+                homePageTexts.render({"data": [{"body": "Shdbejffdidbdjdvdjdvdjdbbdhdbejdbdbfjo", "city": "Las Vegas", "country": "US", "area_code": "702", "state": "NV", "time_since": "0h:18m:53s", "zip_code": "89101"}, {"body": "Hello! Testing 1 2 3", "city": "Gardena", "country": "US", "area_code": "310", "state": "CA", "time_since": "0h:19m:0s", "zip_code": "90249"}, {"body": "Well done", "city": "Los Altos", "country": "US", "area_code": "650", "state": "CA", "time_since": "0h:19m:1s", "zip_code": "94024"}, {"body": "Make it rain ", "city": "Seattle", "country": "US", "area_code": "206", "state": "WA", "time_since": "0h:19m:4s", "zip_code": "98101"}, {"body": "Nice app bock", "city": "Sunnyvale", "country": "US", "area_code": "408", "state": "CA", "time_since": "0h:19m:8s", "zip_code": "94087"}, {"body": "Hi", "city": "La Grange Park", "country": "US", "area_code": "630", "state": "IL", "time_since": "0h:19m:10s", "zip_code": "60561"}, {"body": "Testing 123", "city": "Vancouver", "country": "US", "area_code": "360", "state": "WA", "time_since": "0h:19m:10s", "zip_code": "98675"}, {"body": "ITP 404 is the best!", "city": "San Diego", "country": "US", "area_code": "858", "state": "CA", "time_since": "0h:19m:28s", "zip_code": "92128"}, {"body": "Sup Michael", "city": "Milwaukee", "country": "US", "area_code": "414", "state": "WI", "time_since": "0h:19m:28s", "zip_code": "53202"}, {"body": "Hello", "city": "Burbank", "country": "US", "area_code": "626", "state": "CA", "time_since": "0h:19m:34s", "zip_code": "91505"}, {"body": "Happy Tuesday y'all", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "1h:10m:54s", "zip_code": "90015"}, {"body": "Hoping the demo goes well...", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "1h:50m:52s", "zip_code": "90015"}, {"body": "s/o to itp 404!", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "3h:5m:49s", "zip_code": "90015"}, {"body": "test yak, please don't upvote", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "3h:49m:34s", "zip_code": "90015"}, {"body": "Yik yak is better", "city": "Van Nuys", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:24m:33s", "zip_code": "91401"}, {"body": "What does whinnie the pooh and John the Baptist have in common? Same middle name", "city": "Los Angeles", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:24m:47s", "zip_code": "91335"}, {"body": "This is annoying", "city": "Van Nuys", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:24m:49s", "zip_code": "91401"}, {"body": "Is this thing on?", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "4h:26m:33s", "zip_code": "90015"}, {"body": "Hello", "city": "Sherman Oaks", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:29m:29s", "zip_code": "91504"}, {"body": "Michael bock is adorable ", "city": "Van Nuys", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:34m:37s", "zip_code": "91401"}, {"body": "Love soul cycle. Ready for my post work out sugarfish #yum #fit #trustme", "city": "Los Angeles", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:34m:52s", "zip_code": "90049"}, {"body": "I was listening to the song \"brush the dirt of your shoulders\" and I actually had dirt on my shoulders", "city": "Los Angeles", "country": "US", "area_code": "818", "state": "CA", "time_since": "4h:36m:37s", "zip_code": "91335"}, {"body": "Had a great thanksgiving weekend!", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "8h:25m:7s", "zip_code": "90507"}, {"body": "crazy night last night! love my girls #yolo #basic #what", "city": "Los Angeles", "country": "US", "area_code": "818", "state": "CA", "time_since": "8h:33m:18s", "zip_code": "90049"}, {"body": "One more for good measure ", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "17h:39m:27s", "zip_code": "90015"}, {"body": "This is another text yak ;)", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "17h:53m:26s", "zip_code": "90015"}, {"body": "Huge win over ND this weekend #FightOn", "city": "Chicago", "country": "US", "area_code": "847", "state": "IL", "time_since": "17h:55m:2s", "zip_code": "60042"}, {"body": "Just setting up my twttr", "city": "Los Angeles", "country": "US", "area_code": "310", "state": "CA", "time_since": "17h:58m:53s", "zip_code": "90015"}]});
                 expect($('#text-results-1').html().length).toBeGreaterThan(0);
                 expect($('#text-results-2').html().length).toBeGreaterThan(0);
             });
         });
     });
 });
-
-    // describe('.html()', function() {
-    //  it('should set the innerHTML on 1 to many elements', function() {
-    //      var divs = document.querySelectorAll('#container div');
-    //      var $divs = $('#container div').html('<strong>sup</strong>');
-
-    //      expect(divs[0].innerHTML).toEqual('<strong>sup</strong>');
-    //      expect(divs[1].innerHTML).toEqual('<strong>sup</strong>');
-    //      expect(divs[2].innerHTML).toEqual('<strong>sup</strong>');
-    //  });
-
-    //  it('should be chainable when setting the innerHTML', function() {
-    //      var $divs = $('#container div').html('<strong>sup</strong>');
-    //      expect($divs instanceof jQuery).toBe(true);
-    //  });
-
-    //  it('should return the innerHTML of the first element in the matched set', function() {
-    //      var divHTML = $('#container div').html();
-    //      expect(divHTML).toEqual('<a href="#">Box 1</a>');
-    //  });
-    // });
-
-    // describe('.css()', function() {
-    //  it('should set a single style property: .css(style, value)', function() {
-    //      var divs = document.querySelectorAll('#container div');
-    //      $('#container div').css('color', 'green');
-    //      expect(divs[0].style.color).toEqual('green');
-    //      expect(divs[1].style.color).toEqual('green');
-    //      expect(divs[2].style.color).toEqual('green');
-    //  });
-
-    //  it('should set style properties from an object: .css({ })', function() {
-    //      var divs = document.querySelectorAll('#container div');
-    //      $('#container div').css({ color: 'green', display: 'inline-block' });
-
-    //      expect(divs[0].style.color).toEqual('green');
-    //      expect(divs[1].style.color).toEqual('green');
-    //      expect(divs[2].style.color).toEqual('green');
-    //      expect(divs[0].style.display).toEqual('inline-block');
-    //      expect(divs[1].style.display).toEqual('inline-block');
-    //      expect(divs[2].style.display).toEqual('inline-block');
-    //  });
-
-    //  it('should be chainable', function() {
-    //      var $divs = $('#container div').css({ color: 'green', display: 'inline-block' });
-    //      expect($divs instanceof jQuery).toBe(true);
-    //  });
-    // });
-
-    // describe('.attr()', function() {
-    //  it('should read an attribute from the first element in the matched set', function() {
-    //      expect($('a#home').attr('title')).toEqual('Home Page');
-    //  });
-
-    //  it('should write an attribute to all elements in the matched set', function() {
-    //      var divs = document.querySelectorAll('#container div');
-    //      $('#container div').attr('title', 'testing');
-    //      expect(divs[0].title).toEqual('testing');
-    //      expect(divs[1].title).toEqual('testing');
-    //      expect(divs[2].title).toEqual('testing');
-    //  });
-
-    //  it('should be chainable when in write mode', function() {
-    //      var $divs = $('#container div').attr('title', 'testing');
-    //      expect($divs instanceof jQuery).toBe(true);
-    //  });
-    // });
-
-    // describe('jQuery.each()', function() {
-    //  it('should loop over an array', function() {
-    //      var spy = jasmine.createSpy();
-    //      $.each([1, 2, 3], spy);
-    //      expect(spy.callCount).toEqual(3);
-    //      expect(spy.argsForCall[0]).toEqual([0, 1]);
-    //      expect(spy.argsForCall[1]).toEqual([1, 2]);
-    //      expect(spy.argsForCall[2]).toEqual([2, 3]);
-    //  });
-
-    //  it('should loop over an object', function() {
-    //      var spy = jasmine.createSpy();
-    //      var cat = { name: 'Spot', age: 10, sex: 'male' };
-    //      $.each(cat, spy);
-    //      expect(spy.callCount).toEqual(3);
-    //      expect(spy.argsForCall[0]).toEqual(['name', 'Spot']);
-    //      expect(spy.argsForCall[1]).toEqual(['age', 10]);
-    //      expect(spy.argsForCall[2]).toEqual(['sex', 'male']);
-    //  });
-    // });
-// });
