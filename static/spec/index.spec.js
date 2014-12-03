@@ -7,15 +7,14 @@ describe('Index Page JS', function() {
     describe('textList', function() {
         describe('templateFunction', function() {
             it('should compile a handlebars fucntion', function() {
-                console.log(textList);
-                expect(textList.templateFunction).toEqual(true);
+                expect(textList.templateFunction()).toEqual(' <h4>()</h4> <p></p> ');
             });
         });
 
         describe('render', function() {
             it('should inject 6 texts into the page', function() {
-
-                expect(true).toEqual(true);
+                expect($('#text-results-1').html().length).toBeGreaterThan(0);
+                expect($('#text-results-2').html().length).toBeGreaterThan(0);
             });
         });
     });
